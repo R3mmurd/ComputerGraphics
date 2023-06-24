@@ -15,8 +15,6 @@ struct Data
     static GLuint VBO_id;
     static GLuint shaders_id;
     static GLuint uniform_transform_matrix_id;
-    static bool moving_to_right;
-    static bool growing_up;
 
     static const std::string vertex_shader;
     static const std::string fragment_shader;
@@ -262,9 +260,9 @@ int main()
         glUseProgram(Data::shaders_id);
 
         glm::mat4 transform_matrix{1.f};
-        transform_matrix = glm::scale(transform_matrix, glm::vec3{current_scale, current_scale, 0.f});
         transform_matrix = glm::translate(transform_matrix, glm::vec3{current_triangle_offset, 0.f, 0.f});
         transform_matrix = glm::rotate(transform_matrix, to_radian(current_angle), glm::vec3{0.f, 0.f, 1.f});
+        transform_matrix = glm::scale(transform_matrix, glm::vec3{current_scale, current_scale, 0.f});
 
         glUniformMatrix4fv(Data::uniform_transform_matrix_id, 1, GL_FALSE, glm::value_ptr(transform_matrix));
 

@@ -168,7 +168,7 @@ int main()
     // Allow forward compatibility
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* main_window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World", nullptr, nullptr);
+    GLFWwindow* main_window = glfwCreateWindow(WIDTH, HEIGHT, "Rotation", nullptr, nullptr);
 
     if (!main_window)
     {

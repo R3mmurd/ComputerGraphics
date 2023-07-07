@@ -7,6 +7,8 @@ project(CleanUp)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_STANDARD 17)
+
+# Set compiler flags
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wcast-align -Wno-sign-compare -Wno-write-strings -Wno-parentheses -Wfloat-equal -pedantic ${CMAKE_CXX_FLAGS}")
 
 # Use -std=c++XX instead of -std=gnu++XX

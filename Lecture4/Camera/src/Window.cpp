@@ -6,7 +6,6 @@ Window::~Window()
     glfwTerminate();
 }
 
-
 std::shared_ptr<Window> Window::create(GLint width, GLint height, std::string_view title) noexcept
 {
     LOG_INIT_CERR();

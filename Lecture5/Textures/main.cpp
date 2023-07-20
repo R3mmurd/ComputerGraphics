@@ -69,7 +69,7 @@ int main()
     constexpr GLint WIDTH = 800;
     constexpr GLint HEIGHT = 600;
 
-    auto main_window = Window::create(WIDTH, HEIGHT, "Camera");
+    auto main_window = Window::create(WIDTH, HEIGHT, "Textures");
 
     if (main_window == nullptr)
     {

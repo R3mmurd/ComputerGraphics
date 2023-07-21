@@ -107,6 +107,7 @@ void Shader::clear() noexcept
     }
 
     uniform_projection_id = 0;
+    uniform_view_id = 0;
     uniform_model_id = 0;
 }
 

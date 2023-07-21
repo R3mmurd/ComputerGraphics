@@ -60,7 +60,7 @@ void main()
 }
 )";
 
-void specify_vertices()
+void specify_vertices() noexcept
 {
     unsigned int indices[] = {
         0, 3, 1,
@@ -96,7 +96,7 @@ void specify_vertices()
     glBindVertexArray(0);
 }
 
-void create_shader(GLuint program, const std::string& shader_code, GLenum shader_type)
+void create_shader(GLuint program, const std::string& shader_code, GLenum shader_type) noexcept
 {
     GLuint shader = glCreateShader(shader_type);
 
@@ -123,7 +123,7 @@ void create_shader(GLuint program, const std::string& shader_code, GLenum shader
     glAttachShader(program, shader);
 }
 
-void create_shaders_program()
+void create_shaders_program() noexcept
 {
     Data::shaders_id = glCreateProgram(); 
 

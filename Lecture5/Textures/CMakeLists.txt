@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Project name
-project("Camera")
+project("Textures")
 
 # Set C++ Required version
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

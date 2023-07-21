@@ -20,26 +20,24 @@ struct Data
 {
     static std::vector<std::shared_ptr<Mesh>> mesh_list;
     static std::vector<std::shared_ptr<Shader>> shader_list;
-    static const fs::path shaders_path;
+    static const fs::path root_path;
     static const fs::path vertex_shader_path;
     static const fs::path fragment_shader_path;
-    static const fs::path textures_path;
 };
 
 std::vector<std::shared_ptr<Mesh>> Data::mesh_list{};
 std::vector<std::shared_ptr<Shader>> Data::shader_list{};
 
-const fs::path Data::shaders_path{fs::path{__FILE__}.parent_path() / "shaders"};
-const fs::path Data::vertex_shader_path{Data::shaders_path / "shader.vert"};
-const fs::path Data::fragment_shader_path{Data::shaders_path / "shader.frag"};
-const fs::path Data::textures_path{fs::path{__FILE__}.parent_path() / "textures"};
+const fs::path Data::root_path{fs::path{__FILE__}.parent_path()};
+const fs::path Data::vertex_shader_path{Data::root_path / "shaders" / "shader.vert"};
+const fs::path Data::fragment_shader_path{Data::root_path / "shaders" / "shader.frag"};
 
 float to_radian(float degrees)
 {
     return degrees * M_PI / 180.f;
 }
 
-void specify_vertices()
+void specify_vertices() noexcept
 {
     std::vector<unsigned int> indices{
         0, 3, 1,
@@ -58,7 +56,7 @@ void specify_vertices()
 
     Data::mesh_list.push_back(Mesh::create(vertices, indices));
 }
-void create_shaders_program()
+void create_shaders_program() noexcept
 {
     Data::shader_list.push_back(Shader::create_from_files(Data::vertex_shader_path, Data::fragment_shader_path));
 }
@@ -81,7 +79,7 @@ int main()
 
     Camera camera{glm::vec3{0.f, 0.f, -5.f}, glm::vec3{0.f, 1.f, 0.f}, 0.f, 90.f, 2.f, 20.f};
 
-    Texture brick_texture{Data::textures_path / "brick.png"};
+    Texture brick_texture{Data::root_path / "textures" / "brick.png"};
     brick_texture.load();
 
     float current_angle{0.f};
@@ -117,13 +115,13 @@ int main()
         Data::shader_list[0]->use();
 
         glm::mat4 model{1.f};
-        model = glm::translate(model,glm::vec3{0.f, 0.f, -2.5f});
+        model = glm::translate(model, glm::vec3{0.f, 0.f, -2.5f});
         model = glm::rotate(model, to_radian(current_angle), glm::vec3{0.f, 1.f, 0.f});
         model = glm::scale(model, glm::vec3{0.4f, 0.4f, 1.f});
 
-        glUniformMatrix4fv(Data::shader_list[0]->get_model_id(), 1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix4fv(Data::shader_list[0]->get_projection_id(), 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(Data::shader_list[0]->get_view_id(), 1, GL_FALSE, glm::value_ptr(camera.get_view_matrix()));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_model_id(), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_projection_id(), 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_view_id(), 1, GL_FALSE, glm::value_ptr(camera.get_view_matrix()));
 
         brick_texture.use();
 
@@ -132,6 +130,8 @@ int main()
         {
             mesh->render();
         }
+
+        glUseProgram(0);
 
         main_window->swap_buffers();
     }

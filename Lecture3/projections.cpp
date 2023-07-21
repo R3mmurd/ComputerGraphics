@@ -63,7 +63,7 @@ void main()
 }
 )";
 
-void specify_vertices()
+void specify_vertices() noexcept
 {
     unsigned int indices[] = {
         0, 3, 1,
@@ -99,7 +99,7 @@ void specify_vertices()
     glBindVertexArray(0);
 }
 
-void create_shader(GLuint program, const std::string& shader_code, GLenum shader_type)
+void create_shader(GLuint program, const std::string& shader_code, GLenum shader_type) noexcept
 {
     GLuint shader = glCreateShader(shader_type);
 
@@ -126,7 +126,7 @@ void create_shader(GLuint program, const std::string& shader_code, GLenum shader
     glAttachShader(program, shader);
 }
 
-void create_shaders_program()
+void create_shaders_program() noexcept
 {
     Data::shaders_id = glCreateProgram(); 
 
@@ -248,7 +248,7 @@ int main()
         glUseProgram(Data::shaders_id);
 
         glm::mat4 model{1.f};
-        model = glm::translate(model,glm::vec3{0.f, 0.f, -2.5f});
+        model = glm::translate(model, glm::vec3{0.f, 0.f, -2.5f});
         model = glm::rotate(model, to_radian(current_angle), glm::vec3{0.f, 1.f, 0.f});
         model = glm::scale(model, glm::vec3{0.4f, 0.4f, 1.f});
 

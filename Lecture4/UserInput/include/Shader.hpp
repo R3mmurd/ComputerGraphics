@@ -28,9 +28,9 @@ public:
 
     static std::shared_ptr<Shader> create_from_files(std::filesystem::path vertex_shader_path, std::filesystem::path fragment_shader_path) noexcept;
 
-    GLuint get_projection_id() const noexcept { return uniform_projection_id; }
+    GLuint get_uniform_projection_id() const noexcept { return uniform_projection_id; }
 
-    GLuint get_model_id() const noexcept { return uniform_model_id; }
+    GLuint get_uniform_model_id() const noexcept { return uniform_model_id; }
 
     void use() const noexcept;
 

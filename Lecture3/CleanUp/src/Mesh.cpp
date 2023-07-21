@@ -39,7 +39,7 @@ void Mesh::render() const noexcept
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO_id);
     glDrawElements(GL_TRIANGLES, index_count, GL_UNSIGNED_INT, NULL);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glUseProgram(0);
+    glBindVertexArray(0);
 }
 
 void Mesh::clear() noexcept

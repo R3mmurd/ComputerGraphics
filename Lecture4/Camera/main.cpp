@@ -36,7 +36,7 @@ float to_radian(float degrees)
     return degrees * M_PI / 180.f;
 }
 
-void specify_vertices()
+void specify_vertices() noexcept
 {
     std::vector<unsigned int> indices{
         0, 3, 1,
@@ -54,7 +54,7 @@ void specify_vertices()
 
     Data::mesh_list.push_back(Mesh::create(vertices, indices));
 }
-void create_shaders_program()
+void create_shaders_program() noexcept
 {
     Data::shader_list.push_back(Shader::create_from_files(Data::vertex_shader_path, Data::fragment_shader_path));
 }
@@ -110,19 +110,21 @@ int main()
         Data::shader_list[0]->use();
 
         glm::mat4 model{1.f};
-        model = glm::translate(model,glm::vec3{0.f, 0.f, -2.5f});
+        model = glm::translate(model, glm::vec3{0.f, 0.f, -2.5f});
         model = glm::rotate(model, to_radian(current_angle), glm::vec3{0.f, 1.f, 0.f});
         model = glm::scale(model, glm::vec3{0.4f, 0.4f, 1.f});
 
-        glUniformMatrix4fv(Data::shader_list[0]->get_model_id(), 1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix4fv(Data::shader_list[0]->get_projection_id(), 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(Data::shader_list[0]->get_view_id(), 1, GL_FALSE, glm::value_ptr(camera.get_view_matrix()));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_model_id(), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_projection_id(), 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(Data::shader_list[0]->get_uniform_view_id(), 1, GL_FALSE, glm::value_ptr(camera.get_view_matrix()));
 
         // Draw meshes
         for (const auto& mesh: Data::mesh_list)
         {
             mesh->render();
         }
+
+        glUseProgram(0);
 
         main_window->swap_buffers();
     }

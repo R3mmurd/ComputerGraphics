@@ -207,7 +207,7 @@ void render_scene() noexcept
     Data::model_list[0]->render();
 }
 
-void directional_shadow_map_pass(std::shared_ptr<DirectionalLight> light)
+void directional_shadow_map_pass(std::shared_ptr<DirectionalLight> light) noexcept
 {
     Data::shader_list[1]->use();
     

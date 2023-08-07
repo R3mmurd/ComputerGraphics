@@ -317,7 +317,7 @@ void render_pass(const glm::mat4& projection, const glm::mat4& view) noexcept
 
     auto lower_light = Data::camera->get_position();
     lower_light.y -= 0.3f;
-    Data::spot_lights[0]->set(lower_light, Data::camera->get_direction());
+    //Data::spot_lights[0]->set(lower_light, Data::camera->get_direction());
 
     render_scene();
 }
@@ -374,7 +374,7 @@ int main()
         )
     );*/
 
-    Data::spot_lights.push_back(
+    /*Data::spot_lights.push_back(
         std::make_shared<SpotLight>(
             1024, 1024,      // shadow map size
             0.1f, 100.f,     // near and far
@@ -385,7 +385,7 @@ int main()
             0.f, -1.f, 0.f,  // direction
             20.f             // edge
         )
-    );
+    );*/
 
     Data::sky_box = std::make_shared<SkyBox>(
         Data::root_path,
